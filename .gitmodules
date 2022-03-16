@@ -1,0 +1,3 @@
+[submodule "deepliif-repo"]
+	path = deepliif-repo
+	url = https://github.com/wendywwang/DeepLIIF.git
