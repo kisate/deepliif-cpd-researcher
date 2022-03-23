@@ -135,6 +135,28 @@ def submit_training(options,rest_host=None,rest_port=-1,jwt_token=None,path_cli=
 # --------- inference --------
 # def get_options_inference():
 
+def kernel_file_prepare(path,variables={}):
+    """
+    Insert custom key-value pairs into kernel file, similar to function_prepare() in wml_sdk_utils.py.
+    
+    path: path to the WMLA EDI kernel script
+    variables: a dictionary with key as variable name and value as variable value, to be added to the script
+        example: 
+            variables = {"space_id":"123456",
+                         "username":"abcd"}
+    """
+    lines = []
+    for k,v in variables.items():
+        lines.append(f'{k} = {repr(v)}')
+    
+    # insert custom arguments after the first line in the original file
+    # because the first line is #!/usr/bin/env python
+    lines_file = open(path).readlines()
+    lines_final = [lines_file[0]] + lines + [''.join(lines_file[1:])]
+        
+    with open(path,'w') as f:
+        f.write('\n'.join(lines_final))
+
 # --------- util --------
     
     
