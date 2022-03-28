@@ -9,6 +9,26 @@ from ibm_watson_machine_learning import APIClient
 FOLDER_TMP = 'tmp'
 DEBUG = os.getenv('DEBUG',False)
 
+METADATA_DEPLOYMENT_STRUCTURE = {'MODEL_ASSET_ID':{
+                                     'model_asset': '',
+                                     'model_name': '',
+                                     'deployment_id': '',
+                                     'deployment_space_id':'',
+                                     'openscale_subscription_id': '',
+                                     'openscale_custom_metric_provider': {},
+                                     'wmla_deployment':{'deployment_name':'',
+                                                        'deployment_url':'',
+                                                        'dependency_filename':'',
+                                                        'resource_configs':{}}}}
+
+METADATA_MONITOR_STRUCTURE = {'MONITOR_ID':{'integrated_system_id':'',
+                                            'wml_deployment_id':''}}
+
+METADATA_DEFAULT={'deployment':{'fn':'deployment_metadata.yml',
+                                'structure':METADATA_DEPLOYMENT_STRUCTURE},
+                  'monitor':{'fn':'monitor_metadata.yml',
+                             'structure':METADATA_MONITOR_STRUCTURE}}
+
 def get_client(credentials=None,space_id=None):
     """
     credentials: a dictionary with either
@@ -307,8 +327,6 @@ def function_deploy(function_asset_id,wml_client,function_deployment_name=None):
     return deployment_id,scoring_url
     
 # -------- metadata yaml file --------
-METADATA_DEFAULT={'deployment':'deployment_metadata.yml',
-                  'monitor':'monitor_metadata.yml'}
 
 def metadata_yml_initialize(wml_client,metadata_type='deployment',fn_meta=None):
     """
@@ -319,45 +337,16 @@ def metadata_yml_initialize(wml_client,metadata_type='deployment',fn_meta=None):
                             values include
     """
     assert metadata_type in METADATA_DEFAULT.keys(), f'metadata type {metadata_type} is not one of {METADATA_DEFAULT.keys()}'
-    fn_meta = METADATA_DEFAULT[metadata_type] if fn_meta is None else fn_meta
+    fn_meta = METADATA_DEFAULT[metadata_type]['fn'] if fn_meta is None else fn_meta
     path = f'{FOLDER_TMP}/{fn_meta}'
     
     flag_exists_tmp = os.path.exists(FOLDER_TMP)
     os.makedirs(FOLDER_TMP,exist_ok=True)
     
     if metadata_type=='deployment':
-        metadata = {'TEST_MODEL_ASSET_ID':{
-                     'model_asset': '',
-                     'model_name': '',
-                     'deployment_id': '',
-                     'deployment_space_id':'',
-                     'openscale_subscription_id': '',
-                     'openscale_custom_metric_provider': 
-                         {'segmentation_metrics':{'dir_gt': 'DeepLIIF_Datasets/model_eval/gt_images',
-                                                  'dir_pred': 'DeepLIIF_Datasets/model_eval/model_images',
-                                                  'volume_display_name': 'AdditionalDeepLIIFVolume',
-                                                  'most_recent': 5},
-                          'generic_metrics': {'dir_gt': 'DeepLIIF_Datasets/model_eval/gt_images',
-                                              'dir_pred': 'DeepLIIF_Datasets/model_eval/model_images',
-                                              'volume_display_name': 'AdditionalDeepLIIFVolume',
-                                              'most_recent': 1}
-                         },
-            'wmla_deployment':{'deployment_name':'',
-                               'deployment_url':'',
-                               'dependency_filename':'',
-                               'volume_display_name':'',
-                               'resource_configs':{'enable_gpus':'',
-                                                   'n_cpus':'',
-                                                   'memory_allocation':'',
-                                                   'n_replicas':'',
-                                                   'n_min_kernels':'',
-                                                   'task_execution_timeout':'',
-                                                   'task_batch_size':''}}}}
+        metadata = METADATA_DEPLOYMENT_STRUCTURE
     else:
-        metadata = {'TEST_MONITOR_ID':{
-                     'integrated_system_id':'',
-                     "wml_deployment_id":''
-                 }}
+        metadata = METADATA_MONITOR_STRUCTURE
     
     with open(path,'w') as f:
         f.write(yaml.dump(metadata))
@@ -375,7 +364,7 @@ def metadata_yml_add(metadata,wml_client,metadata_type='deployment',fn_meta=None
     """
     
     assert metadata_type in METADATA_DEFAULT.keys(), f'metadata type {metadata_type} is not one of {METADATA_DEFAULT.keys()}'
-    fn_meta = METADATA_DEFAULT[metadata_type] if fn_meta is None else fn_meta
+    fn_meta = METADATA_DEFAULT[metadata_type]['fn'] if fn_meta is None else fn_meta
     path = f'{FOLDER_TMP}/{fn_meta}'
     
     flag_exists_tmp = os.path.exists(FOLDER_TMP)
@@ -408,7 +397,7 @@ def metadata_yml_add(metadata,wml_client,metadata_type='deployment',fn_meta=None
 
 def metadata_yml_update(metadata,wml_client,metadata_type='deployment',fn_meta=None):
     assert metadata_type in METADATA_DEFAULT.keys(), f'metadata type {metadata_type} is not one of {METADATA_DEFAULT.keys()}'
-    fn_meta = METADATA_DEFAULT[metadata_type] if fn_meta is None else fn_meta
+    fn_meta = METADATA_DEFAULT[metadata_type]['fn'] if fn_meta is None else fn_meta
     path = f'{FOLDER_TMP}/{fn_meta}'
     
     flag_exists_tmp = os.path.exists(FOLDER_TMP)
@@ -444,7 +433,7 @@ def metadata_yml_delete_key(key,wml_client,metadata_type='deployment',fn_meta=No
     key: can be a string of a key, or a list of multiple keys
     """
     assert metadata_type in METADATA_DEFAULT.keys(), f'metadata type {metadata_type} is not one of {METADATA_DEFAULT.keys()}'
-    fn_meta = METADATA_DEFAULT[metadata_type] if fn_meta is None else fn_meta
+    fn_meta = METADATA_DEFAULT[metadata_type]['fn'] if fn_meta is None else fn_meta
     path = f'{FOLDER_TMP}/{fn_meta}'
     
     flag_exists_tmp = os.path.exists(FOLDER_TMP)
@@ -476,7 +465,7 @@ def metadata_yml_delete_key(key,wml_client,metadata_type='deployment',fn_meta=No
 
 def metadata_yml_load(wml_client,metadata_type='deployment',fn_meta=None):
     assert metadata_type in METADATA_DEFAULT.keys(), f'metadata type {metadata_type} is not one of {METADATA_DEFAULT.keys()}'
-    fn_meta = METADATA_DEFAULT[metadata_type] if fn_meta is None else fn_meta
+    fn_meta = METADATA_DEFAULT[metadata_type]['fn'] if fn_meta is None else fn_meta
 
     path = f'{FOLDER_TMP}/{fn_meta}'
     
@@ -502,13 +491,54 @@ def metadata_yml_list(wml_client,metadata_type='deployment',fn_meta=None):
       - openscale subscription id
     """
     assert metadata_type in METADATA_DEFAULT.keys(), f'metadata type {metadata_type} is not one of {METADATA_DEFAULT.keys()}'
-    fn_meta = METADATA_DEFAULT[metadata_type] if fn_meta is None else fn_meta
+    fn_meta = METADATA_DEFAULT[metadata_type]['fn'] if fn_meta is None else fn_meta
     
     confs = metadata_yml_load(wml_client,fn_meta=fn_meta)
     confs_top_level = get_top_level(confs,keys_ignore=['deployment_space_id','deployment_id','model_name'])
     df_conf = pd.DataFrame.from_dict(confs_top_level,'index')
     return df_conf
 
+def metadata_yml_validate(metadata,with_key=True,metadata_type='deployment'):
+    """
+    Validate if a metadata dictionary has valid structure.
+    
+    metadata: a metadata dictionary with one or multiple entries; if multiple entries are
+              included, each entry has to have a key (model asset id) to differentiate
+    with_key: when metadata has only 1 entry, whether the key is included or not
+    """
+    assert metadata_type in METADATA_DEFAULT.keys(), f'metadata type {metadata_type} is not one of {METADATA_DEFAULT.keys()}'
+    d_structure = METADATA_DEFAULT[metadata_type]['structure']
+    
+    def validate(d_yml,d_ref,path=''):
+        if type(d_yml) != dict: 
+            msg.append(f'{path} is not a dictionary')
+        for k in d_ref:
+            if k not in d_yml:
+                msg.append(f'{path}.{k} cannot be found')
+            elif type(d_ref[k]) == dict:
+                validate(d_yml[k],d_ref[k],path=f'{path}.{k}')
+    
+    if not with_key:
+        metadata = {None:metadata}
+    
+    d_res = {}
+    count_valid = 0
+    for key,conf in metadata.items():
+        d_res[key] = {}
+        msg = []
+
+        validate(conf,d_structure['MODEL_ASSET_ID'])
+        
+        d_res[key]['msg'] = msg
+        d_res[key]['flag_valid'] = len(msg) == 0
+
+        if d_res[key]['flag_valid']:
+            count_valid += 1
+    
+    print(f"{count_valid}/{len(metadata.keys())} entries are valid")
+    return count_valid == len(metadata.keys()), d_res
+    
+    
 
 # -------- util --------
 def delete_tmp_files(path,folder_tmp=FOLDER_TMP,keep_folder_tmp=False):
@@ -534,3 +564,4 @@ def get_top_level(d,keys_ignore=[]):
                     elif k == 'wmla_deployment':
                         d_res[k1]['deployment_name'] = v['deployment_name']
     return d_res
+
