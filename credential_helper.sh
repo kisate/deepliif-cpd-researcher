@@ -1,5 +1,5 @@
 #!/bin/bash
-export GIT_USER="wendywwang"
+export GIT_USER="enter your git username here"
 
 
 if [[ "$GIT_USER" == *enter* ]]; then
