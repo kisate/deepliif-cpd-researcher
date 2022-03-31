@@ -151,7 +151,7 @@ def trainProcess():
         print('** Validation: %f (best) - %f (current)' % (best_val, lossval))
     
     os.makedirs('./model/',exist_ok=True)
-    torch.save(model, './model/model.pt')
+    torch.save(model.state_dict(), './model/model.pt')
 
 
 

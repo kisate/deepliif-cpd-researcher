@@ -159,7 +159,7 @@ def trainProcess():
         torch.save(model, path)
         sv.upload(path)
     else:
-        torch.save(model, './model/model.pt')
+        torch.save(model.state_dict(), './model/model.pt')
 
 
 
