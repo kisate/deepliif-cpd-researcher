@@ -28,10 +28,10 @@ class VisdomLinePlotter(object):
         self.env = env_name
         self.plots = {}
         self.remote = remote
-        self.pickle_dir = '/userfs/visdom-tutorial/checkpoints/pickle'
-        os.makedirs(self.pickle_dir,exist_ok=True)
+        self.pickle_dir = './checkpoints/pickle'
         
         if self.remote:
+            os.makedirs(self.pickle_dir,exist_ok=True)
             pickle.dump(env_name,open(os.path.join(self.pickle_dir,'env_name.pickle'),'wb'))
             print('Remote mode, snapshot created: env_name')
         

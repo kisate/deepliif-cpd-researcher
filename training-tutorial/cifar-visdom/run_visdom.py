@@ -3,7 +3,7 @@ import time
 import os
 import pickle
 
-cmd = 'python -m visdom.server --hostname $HOSTNAME'
+cmd = 'python -m visdom.server'
 Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 print('visdom started')
 
@@ -16,14 +16,14 @@ if __name__ == "__main__":
     # Plots
     global plotter
     
-    path_init = '/userfs/visdom-tutorial/checkpoints/pickle/env_name.pickle'
+    path_init = './checkpoints/pickle/env_name.pickle'
     while not os.path.exists(path_init):
         time.sleep(1)
     
     env_name = pickle.load(open(path_init,'rb'))
     plotter = utils.VisdomLinePlotter(env_name,remote=False)
     
-    path_plot = '/userfs/visdom-tutorial/checkpoints/pickle/plot.pickle'
+    path_plot = './checkpoints/pickle/plot.pickle'
     while not os.path.exists(path_plot):
         time.sleep(1)
     
