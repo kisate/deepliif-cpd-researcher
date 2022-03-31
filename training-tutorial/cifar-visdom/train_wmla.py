@@ -10,7 +10,9 @@ from torchvision import transforms
 
 import numpy as np
 
-import utils
+import utils_wmla as utils
+import os
+import storage_volume_utils as sv
 
 
 # Model
@@ -138,7 +140,7 @@ def trainProcess():
 
     # Now, let's start the training process!
     print('Training...')
-    for epoch in range(100):
+    for epoch in range(20):
 
         # Compute a training epoch
         trainEpoch(trainloader, model, criterion, optimizer, epoch)
@@ -149,7 +151,15 @@ def trainProcess():
         # Print validation accuracy and best validation accuracy
         best_val = max(lossval, best_val)
         print('** Validation: %f (best) - %f (current)' % (best_val, lossval))
-
+    
+    os.makedirs('./model/',exist_ok=True)
+    if os.getenv('APP_ID') is not None:
+        os.makedirs(f'./model/{os.environ["APP_ID"]}',exist_ok=True)
+        path = f'./model/{os.environ["APP_ID"]}/model.pt'
+        torch.save(model, path)
+        sv.upload(path)
+    else:
+        torch.save(model, './model/model.pt')
 
 
 
@@ -158,7 +168,8 @@ if __name__ == "__main__":
 
     # Plots
     global plotter
-    plotter = utils.VisdomLinePlotter(env_name='Tutorial Plots')
+    env_name = 'Tutorial Plots' if os.getenv('APP_ID') is None else os.environ['APP_ID']
+    plotter = utils.VisdomLinePlotter(env_name=env_name)
 
     # Training process
     trainProcess()
