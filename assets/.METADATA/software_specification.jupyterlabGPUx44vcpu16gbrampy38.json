@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "name": "jupyterlab GPUx4 4vcpu 16gb ram py3.8",
+    "name": "jupyterlab GPUx1 4vcpu 16gb ram py3.8",
     "origin_country": "US",
     "tags": [
       "dsx"
@@ -20,7 +20,7 @@
   "entity": {
     "software_specification": {
       "type": "derived",
-      "display_name": "jupyterlab GPUx4 4vcpu 16gb ram py3.8",
+      "display_name": "jupyterlab GPUx1 4vcpu 16gb ram py3.8",
       "base_software_specification": {
         "guid": "5d3232bf-c86b-5df4-a2cd-7bb870a1cd4e",
         "href": "/v2/software_specifications/5d3232bf-c86b-5df4-a2cd-7bb870a1cd4e"

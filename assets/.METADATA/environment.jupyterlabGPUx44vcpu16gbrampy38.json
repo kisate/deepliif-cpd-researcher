@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "name": "jupyterlab GPUx4 4vcpu 16gb ram py3.8",
+    "name": "jupyterlab GPUx1 4vcpu 16gb ram py3.8",
     "description": "",
     "origin_country": "US",
     "tags": [
@@ -21,7 +21,7 @@
   "entity": {
     "environment": {
       "sub_type": "jupyterlab",
-      "display_name": "jupyterlab GPUx4 4vcpu 16gb ram py3.8",
+      "display_name": "jupyterlab GPUx1 4vcpu 16gb ram py3.8",
       "hardware_specification": {
         "type": "referenced",
         "guid": "hardware_specification.jupyterlabGPUx44vcpu16gbrampy38"
