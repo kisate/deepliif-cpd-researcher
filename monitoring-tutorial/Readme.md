@@ -3,6 +3,7 @@ OpenScale comes with a few out-of-the-box (OOTB) monitors, including:
 - Quality
 - Fairness
 - Drift
+
 Each monitor contains multiple metrics that measures the performance of interest over time, and one monitor can be applied onto multiple deployments to be tracked.
 
 In addition to the OOTB monitors, it is helpful to create **custom monitors** that are tailored to the context and could be re-used by model deployments of a similar kind. For example, a monitor for image segmentation metrics.
