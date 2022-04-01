@@ -8,7 +8,7 @@ Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 print('visdom started')
 
 volume = 'AdditionalDeepLIIFVolume'
-app_id = 'cpd-wmla-212'
+app_id = 'cpd-wmla-219'
 
 import utils
 

@@ -1,5 +1,8 @@
 from __future__ import division
 
+import subprocess
+subprocess.run("pip install visdom --user",shell=True)
+
 import torch
 import torch.nn as nn
 import torch.utils.data

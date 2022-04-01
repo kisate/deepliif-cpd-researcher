@@ -41,3 +41,18 @@ Edit the volume name in `run_visdom_wmla.py` using this folder name.
 ```
 python run_visdom_wmla.py
 ```
+
+## Additional Packages
+Watson Studio runtime and Watson Machine Learning Accelerator runtime are different, and they do not share the same configuration. This means you need to configure both if you need to bring in additional library, such as `visdom`:
+- In WS, you can add it into the Customization section in your environment configuration before starting one.
+- In WMLA, there is no UI to control this, and you will need a line or two in your script to install extra packages, for example
+```
+import subprocess
+subprocess.run("pip install visdom --user",shell=True)
+```
+
+#### Different behavior of package installation in WS vs. in WMLA
+
+In WS, the additional packages installed via code within a runtime or via the Customization section in environment configuration are essentially **temporary**. Every time the a new environment / pod starts, the same installation process needs / will be executed again. The installed packages won't be memorized.
+
+Contrary to WS, in WMLA the packages installed via code in a training script are saved permanently. The next time you submit the same script, you shall see messages indicating "Requirement already satisfied" even though it is a new environment / pod.
