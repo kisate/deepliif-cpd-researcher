@@ -29,10 +29,15 @@ To transfer checkpoints (visdom data, trained model, etc.) back to storage volum
 - cpd_utils.py
 
 #### How to:
+1. Make sure you have added a storage volume as data connection to the project, and your compute environment was started after the data connection is created. If this is the case, you should be able to see a folder for your storage volume:
+```
+ls -lh /mnts
+```
+Edit the volume name in `run_visdom_wmla.py` using this folder name.
 
-1. Use notebook `wmla_job_submission` to submit the training. You will receive an application id.
-2. Edit the application id in `run_visdom_wmla.py`.
-3. Start visdom:
+2. Use notebook `wmla_job_submission` to submit the training. You will receive an application id.
+3. Edit the application id in `run_visdom_wmla.py`.
+4. Start visdom:
 ```
 python run_visdom_wmla.py
 ```
