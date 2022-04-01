@@ -15,7 +15,7 @@ import psutil
 
 if __name__ == '__main__':
     print('-------- start training... --------')
-    subprocess.run(f'deepliif train --dataroot {root_folder} --name Test_Model_wendy_wmla --remote True --remote-transfer-cmd storage_volume_utils.upload --batch-size 3 --gpu-ids 0 --display-env $APP_ID',shell=True)
+    subprocess.run(f'deepliif train --dataroot {root_folder} --name Test_Model_wmla_$APP_ID --remote True --remote-transfer-cmd storage_volume_utils.upload --batch-size 3 --gpu-ids 0 --display-env $APP_ID',shell=True)
     print('-------- finished training --------')
 
     # (DP) use batch_size > 1 if you want to leverage multiple gpus; batch_size=1 will only effectively use 1 gpu, because this setting is picked up by DP's single process and the amount is distributed across multiple gpus
