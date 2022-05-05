@@ -1,3 +1,9 @@
 [submodule "deepliif-repo"]
 	path = deepliif-repo
 	url = https://github.com/wendywwang/DeepLIIF.git
+[submodule "DeepLIIF"]
+	path = deepliif-nadeemlab
+	url = https://github.com/nadeemlab/DeepLIIF.git
+[submodule "deepliif-nadeemlab"]
+	path = deepliif-nadeemlab
+	url = https://github.com/nadeemlab/DeepLIIF.git
