@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "asset_type": "connection",
+    "name": "AdditionalDeepLIIFVolume",
+    "origin_country": "us",
+    "rov": {
+      "mode": 0
+    },
+    "asset_category": "USER",
+    "created_at": "2022-03-31T13:12:36Z",
+    "created": 1648732356155,
+    "asset_id": "connection.AdditionalDeepLIIFVolume",
+    "asset_attributes": [
+      "connection"
+    ]
+  },
+  "entity": {
+    "connection": {
+      "datasource_type": "9f30e3c3-b854-4144-b5c3-98b7a835dc79",
+      "context": "source,target",
+      "properties": {
+        "volume": "AdditionalDeepLIIFVolume",
+        "instance_id": "1643394248045065"
+      },
+      "flags": [
+        "personal_credentials"
+      ]
+    }
+  },
+  "attachments": []
+}
