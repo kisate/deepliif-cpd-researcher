@@ -111,7 +111,7 @@ def score( input_data ):
     os.environ['USER_ACCESS_TOKEN'] = access_token
 
     published_measurements = []
-    error_msg = None
+    error_msg = []
 
     custom_monitoring_run_id = custom_monitor_instance_params["run_details"]["run_id"]
     try:
@@ -122,16 +122,17 @@ def score( input_data ):
         else:
             custom_monitor_instance_params["run_details"]["run_status"] = "error"
             custom_monitor_instance_params["run_details"]["run_error_msg"] = published_measurement
-            error_msg = published_measurement
+            error_msg.append(published_measurement)
 
         custom_monitor_instance_params["last_run_time"] = timestamp
         status_code, response = update_monitor_instance(base_url, access_token, custom_monitor_instance_id, custom_monitor_instance_params)
         if not int(status_code) in [200, 201, 202]:
-            error_msg = response
+            error_msg.append(response)
 
     except Exception as ex:
-        error_msg = str(ex)
-    if error_msg is None:
+        error_msg.append(str(ex))
+        
+    if len(error_msg) == 0:
         response_payload = {
             "predictions" : [{ 
                 "values" : published_measurements
