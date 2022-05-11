@@ -69,6 +69,12 @@ class MatchKernel(Kernel):
             self.count += 1
             request_id = f"{os.environ['MSD_POD_NAME']}-{self.count}"
             print('on_task_invoke',request_id)
+            
+            # the default log display level is INFO, which allows you to see info/warn/error logs
+            Kernel.log_info("log_info")
+            Kernel.log_warn("log_warn")
+            Kernel.log_debug("log_debug")
+            Kernel.log_error("log_error")
                 
             # parse input
             input_data = json.loads(task_context.get_input_data())
