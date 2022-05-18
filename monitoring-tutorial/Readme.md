@@ -91,7 +91,7 @@ Remember to deploy this modified script, not the original script.
 *Having the credentials as additional variables added using the utility function is useful when you need to version control the custom monitor script, say using github. You don't want to take the risk of leaking your credentials to github, but still want to keep track of the changes. Using this method, you can track the original custom monitor script, and locally test & deploy the modified one.*
 
 ### 2.2 Local Test
-You may refer to notebook [B1_OpenScale_Custom_Monitor_Dev_and_Test]() that shows how to add dependent variables & scripts into a custom monitor deployale script, and then run local testing, or use the following examples.
+In this tutorial, it is showcased in notebook [prepare_and_test_script](prepare_and_test_script.ipynb). You may also refer to notebook [B1_OpenScale_Custom_Monitor_Dev_and_Test](../B1_OpenScale_Custom_Monitor_Dev_and_Test.ipynb). Both shows how to add dependent variables & scripts into a custom monitor deployale script, and then run local testing, or use the following examples.
 
 #### Test code outside of functions
 ```
@@ -109,7 +109,11 @@ You may need to supply the needed information to the required argument(s).
 Unfortunately, this is **impossible**. The reason is that the `score` function requires input that you do not have at the moment of developing a custom monitor: subscription id, monitor id, monitor instance id, integrated system id .... OpenScale needs to pass in such information to trigger metrics logging when this custom monitor is used in reality.
 
 ### 2.3 Deploy Script
-You may refer to notebook [B2_OpenScale_Custom_Monitor_Deploy](). Basically it covers the following tasks:
+In this tutorial, it is showcased in a sequence of notebooks: [1_wml_deploy.ipynb](1_wml_deploy.ipynb), [2_openscale_register_custom_monitor.ipynb](2_openscale_register_custom_monitor.ipynb), [3_openscale_configure_monitor.ipynb](3_openscale_configure_monitor.ipynb)
+
+You may also refer to notebook [B2_OpenScale_Custom_Monitor_Deploy](../B2_OpenScale_Custom_Monitor_Deploy). 
+
+Basically this step includes the following tasks:
 
 | step | input | output |
 |------|-------|--------|
