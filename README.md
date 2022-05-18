@@ -86,6 +86,6 @@ subprocess.Popen('bash monitor_gpu.sh',shell=True)
 ## Train in Watson Machine Learning Accelerator without Watson Studio
 Model training per se is not dependent on Watson Studio. You can edit scripts on your laptop or a different environment, then use the same WMLA cli (`dlicmd.py`) to submit training jobs. In this case, you will need to specify in this cli:
 - WMLA host
-- JWT access token, see [how to get access token](https://github.com/drewmibm/watson-studio-template#watson-studio-template)
+- JWT access token, see [how to get access token](https://github.com/drewmibm/deepliif-cpd-mlops#33-thresholds_-metric-thresholds-for-openscale-monitor)
 
 However, Visdom will be tricky, since the pickle files are written into a Cloud Pak for Data storage volume which is not mounted to your laptop or your other environment. You may want to change the data transfer method and use a storage you have filesystem-like access to. More details can be found in DeepLIIF's [doc](https://github.com/nadeemlab/DeepLIIF/blob/main/Multi-GPU%20Training.md#track-training-progress-in-visualizer).
