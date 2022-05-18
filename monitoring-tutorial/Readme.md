@@ -111,7 +111,7 @@ Unfortunately, this is **impossible**. The reason is that the `score` function r
 ### 2.3 Deploy Script
 In this tutorial, it is showcased in a sequence of notebooks: [1_wml_deploy.ipynb](1_wml_deploy.ipynb), [2_openscale_register_custom_monitor.ipynb](2_openscale_register_custom_monitor.ipynb), [3_openscale_configure_monitor.ipynb](3_openscale_configure_monitor.ipynb)
 
-You may also refer to notebook [B2_OpenScale_Custom_Monitor_Deploy](../B2_OpenScale_Custom_Monitor_Deploy.ipynb). 
+You may also refer to notebook [B2_OpenScale_Custom_Monitor_Deploy](../B2_OpenScale_Custom_Monitor_Deployment.ipynb). 
 
 Basically this step includes the following tasks:
 
