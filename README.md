@@ -89,3 +89,6 @@ Model training per se is not dependent on Watson Studio. You can edit scripts on
 - JWT access token, see [how to get access token](https://github.com/drewmibm/deepliif-cpd-mlops#33-thresholds_-metric-thresholds-for-openscale-monitor)
 
 However, Visdom will be tricky, since the pickle files are written into a Cloud Pak for Data storage volume which is not mounted to your laptop or your other environment. You may want to change the data transfer method and use a storage you have filesystem-like access to. More details can be found in DeepLIIF's [doc](https://github.com/nadeemlab/DeepLIIF/blob/main/Multi-GPU%20Training.md#track-training-progress-in-visualizer).
+
+## Build and Test DeepLIIF Package
+When installing the deepliif package you built, use the `--no-dependencies` flag to avoid too many package version conflicts. This is because the deepliif package limits many dependencies to a specific version, rather than a wide range of versions. As of Feb 2022, adding flag `--no-dependencies` still allows the deepliif package to function properly.
