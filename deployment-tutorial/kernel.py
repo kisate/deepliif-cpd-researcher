@@ -16,6 +16,7 @@ path_model = 'model.pt'
 
 dir_user = os.environ['REDHARE_MODEL_PATH']
 dir_python_pkg = f"{dir_user}/python_packages"
+dir_python_pkg = dir_python_pkg.replace("repo", "work")
 os.makedirs(dir_python_pkg,exist_ok=True)
 sys.path.insert(0, dir_python_pkg)
 
