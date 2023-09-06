@@ -1,7 +1,6 @@
 from __future__ import division
 
 import subprocess
-subprocess.run("pip install visdom --user",shell=True)
 
 import torch
 import torch.nn as nn
@@ -69,7 +68,7 @@ def trainEpoch(train_loader, model, criterion, optimizer, epoch):
             epoch, batch_idx, len(train_loader), 100. * batch_idx / len(train_loader), loss=losses))
 
     # Plot loss after all mini-batches have finished
-    plotter.plot('loss', 'train', 'Class Loss', epoch, losses.avg)
+    # plotter.plot('loss', 'train', 'Class Loss', epoch, losses.avg)
 
 
 def valEpoch(val_loader, model, criterion, epoch):
@@ -109,8 +108,8 @@ def valEpoch(val_loader, model, criterion, epoch):
               'Accuracy {acc}'.format(losses.avg, acc=acc))
 
         # Plot validation results
-        plotter.plot('loss', 'val', 'Class Loss', epoch, losses.avg)
-        plotter.plot('acc', 'val', 'Class Accuracy', epoch, acc)
+        # plotter.plot('loss', 'val', 'Class Loss', epoch, losses.avg)
+        # plotter.plot('acc', 'val', 'Class Accuracy', epoch, acc)
 
         # Return acc as the validation outcome
         return acc
@@ -170,9 +169,11 @@ def trainProcess():
 if __name__ == "__main__":
 
     # Plots
-    global plotter
-    env_name = 'Tutorial Plots' if os.getenv('APP_ID') is None else os.environ['APP_ID']
-    plotter = utils.VisdomLinePlotter(env_name=env_name)
+    # global plotter
+    # env_name = 'Tutorial Plots' if os.getenv('APP_ID') is None else os.environ['APP_ID']
+    # plotter = utils.VisdomLinePlotter(env_name=env_name)
 
+    
+    
     # Training process
     trainProcess()
