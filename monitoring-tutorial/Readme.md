@@ -113,6 +113,8 @@ In this tutorial, it is showcased in a sequence of notebooks: [1_wml_deploy.ipyn
 
 You may also refer to notebook [B2_OpenScale_Custom_Monitor_Deploy](../B2_OpenScale_Custom_Monitor_Deployment.ipynb). 
 
+It is important to update first the SOFTWARE_SPEC_NAME variable in the wml_sdk_utils.py with the name of the current version of the runtime. It can be found on the CPD documentation website.
+
 Basically this step includes the following tasks:
 
 | step | input | output |

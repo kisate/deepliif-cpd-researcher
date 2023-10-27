@@ -35,6 +35,8 @@ ls -lh /mnts
 ```
 Edit the volume name in `run_visdom_wmla.py` using this folder name.
 
+Also update `VOLUME_DISPLAY_NAME` in `wmla_job_submission` notebook with the name of the volume.
+
 2. Use notebook `wmla_job_submission` to submit the training. You will receive an application id.
 3. Edit the application id in `run_visdom_wmla.py`.
 4. Start visdom:

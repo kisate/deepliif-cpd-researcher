@@ -6,6 +6,7 @@ import shutil
 
 from ibm_watson_machine_learning import APIClient
 
+SOFTWARE_SPEC_NAME = "runtime-22.2-py3.10"
 FOLDER_TMP = 'tmp'
 DEBUG = os.getenv('DEBUG',False)
 
@@ -286,8 +287,7 @@ def function_store(path_script,wml_client,function_name=None,overwrite=True):
     if overwrite:
         function_delete(wml_client,function_name)
     
-    software_spec_id =  wml_client.software_specifications.get_id_by_name('runtime-22.2-py3.10')
-    print(software_spec_id)
+    software_spec_id =  wml_client.software_specifications.get_id_by_name(SOFTWARE_SPEC_NAME)
     function_meta_props = {
          wml_client.repository.FunctionMetaNames.NAME: function_name,
          wml_client.repository.FunctionMetaNames.SOFTWARE_SPEC_ID: software_spec_id
