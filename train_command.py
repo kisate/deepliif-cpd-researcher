@@ -1,14 +1,40 @@
 import os
+from pathlib import Path
+DOWNLOAD_DATA = False
+
 root_folder = os.getenv("DATA_DIR")
+Path(root_folder).mkdir(parents=True, exist_ok=True)
+
+print(os.listdir(root_folder))
+
 
 import subprocess
+
+if DOWNLOAD_DATA:
+    print(subprocess.run(f"bash download_data.sh {str(Path(root_folder).parent)}", shell=True))
+
+print(os.listdir('/gpfs/mydatafs/'))
+print(os.listdir('/gpfs/'))
+print(os.listdir('/gpfs/mygpfs'))
+print(os.listdir('.'))
+print(root_folder)
+print(os.listdir(root_folder))
+print(os.getcwd())
+print(os.listdir('/gpfs/mydatafs/MNIST'))
+print(os.listdir('/'))
+print(os.listdir('/mnts'))
+# print("HEH")
+
+raise
+
 print('Install packages and start gpu monitor ...')
-subprocess.run('pip install dominate visdom gpustat numba==0.54.1 --user',shell=True)
-subprocess.run('pip install torch==1.10.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html --user',shell=True)
+subprocess.run('pip install dominate visdom gpustat numba --user',shell=True)
+subprocess.run('pip install torch -f https://download.pytorch.org/whl/torch_stable.html --user',shell=True)
 subprocess.Popen('bash monitor_gpu.sh',shell=True)
 
-os.environ['VOLUME_DISPLAY_NAME'] = 'AdditionalDeepLIIFVolume'
+# os.environ['VOLUME_DISPLAY_NAME'] = 'cpd::demo-project-pvc'
 os.environ['TORCH_HOME'] = os.environ['PWD'] # tell pytorch hub to use the working directory to cache pre-trained models, not $HOME which wmla users have no write access to
+print(os.environ['TORCH_HOME'])
 
 import psutil
 

@@ -112,7 +112,7 @@ def submit_training(options,rest_host=None,rest_port=-1,jwt_token=None,path_cli=
                you are in a WS environment, or by using cpd_utils.get_access_token(), or follow the API doc: https://cloud.ibm.com/apidocs/cloud-pak-data#getauthorizationtoken
     path_cli: path to the cli file
     """
-    rest_host = fill_in_default_if_none(rest_host,'HOST','wmla-console-cpd-wmla.apps.cpd.mskcc.org')
+    rest_host = fill_in_default_if_none(rest_host,'HOST','wmla-console-cpd.apps.cpd.mskcc.org')
     jwt_token = fill_in_default_if_none(jwt_token,'USER_ACCESS_TOKEN')
     
     assert jwt_token is not None, 'Provide the bearer token to authenticate. You can get it by using cpd_utils.get_access_token(), or follow the API doc: https://cloud.ibm.com/apidocs/cloud-pak-data#getauthorizationtoken'

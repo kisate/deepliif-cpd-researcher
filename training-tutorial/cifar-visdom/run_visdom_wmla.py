@@ -7,8 +7,8 @@ cmd = 'python -m visdom.server'
 Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
 print('visdom started')
 
-volume = 'AdditionalDeepLIIFVolume'
-app_id = 'cpd-wmla-219'
+volume = 'demo_project_pvc'
+app_id = 'cpd-40'
 
 import utils
 

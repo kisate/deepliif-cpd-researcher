@@ -1,1 +1,1 @@
-{"name": "cifar-model-wendy", "kernel_path": "kernel.py", "readme": "README.md", "weight_path": "./", "runtime": "dlipy3", "framework": "PyTorch", "schema_version":"1"}
+{"name": "cifar-model-wendy-demo", "kernel_path": "kernel.py", "readme": "README.md", "weight_path": "./", "runtime": "dlipy3", "framework": "PyTorch", "schema_version":"1"}
